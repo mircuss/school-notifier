@@ -17,6 +17,7 @@ admin_menu = InlineKeyboardMarkup(inline_keyboard=[
         InlineKeyboardButton(text="Додати клас", callback_data="add_classroom")
     ],
     [
+        InlineKeyboardButton(text="Зміни в розкладі", callback_data="make_edit"),
         InlineKeyboardButton(text="Додати завуча", callback_data="add_head_teacher")
     ],
     [

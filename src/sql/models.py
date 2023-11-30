@@ -54,4 +54,5 @@ class Pupil(Base):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     class_num: Mapped[int] = mapped_column(Integer)
     class_letter: Mapped[str] = mapped_column(String(250))
-    school_name: Mapped[bool] = mapped_column(Boolean, default=False)
+    school_name: Mapped[str] = mapped_column(String(250))
+

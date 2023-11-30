@@ -48,7 +48,7 @@ async def add_announce(message: Message, state: FSMContext, bot: Bot):
         else:
             room = ""
 
-        await Repo().update_lesson(edit_room=room, edit_lesson=" ".join(info[1:-1]), classroom=classroom, day=day, num=info[0])
+        await Repo().update_lesson(edit_room=room, edit_lesson=" ".join(info[1:-1]), classroom=classroom, day=day, num=int(info[0])-1)
     class_num, class_letter = classroom.split("-")
     pupils = await Repo().get_pupils_by_classroom(class_letter=class_letter, class_num=int(class_num))
     days = {"0": "Понеділок",
@@ -57,6 +57,6 @@ async def add_announce(message: Message, state: FSMContext, bot: Bot):
             "3": "Четвер",
             "4": "П'ятниця"}
     print(pupils)
-    for pupil in pupils[0]:
-        await bot.send_message(chat_id=pupil.id, text=f"{days.get(day)}\n{message.text}")
-    
+    for pupil in pupils:
+        print(pupil[0].id)
+        await bot.send_message(chat_id=pupil[0].id, text=f"{days.get(day)}\n{message.text}")

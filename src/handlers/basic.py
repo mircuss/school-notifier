@@ -59,8 +59,6 @@ async def get_class(call: CallbackQuery, state: FSMContext):
 async def select_classroom(call: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     classroom = call.data.split("_")[-1].split("-")
-    print(call.message.from_user.id)
-    print(call.message.from_user.id)
     await Repo().add_pupil(user_id=call.from_user.id, class_num=classroom[0], class_letter=classroom[1], school_name=data["school"])
     await state.clear()
     await call.message.answer(text="Ви успішно зареєструвались", reply_markup=main_markup)

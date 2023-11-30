@@ -28,9 +28,14 @@ class Repo:
 
     async def add_pupil(self, user_id: int, class_num: int, class_letter: str, school_name: str) -> Pupil:
         pupil = Pupil(id=user_id, class_num=class_num, class_letter=class_letter, school_name=school_name)
-        self.session.add(pupil)
-        await self.session.commit()
-        return pupil
+        try:
+            self.session.add(pupil)
+            await self.session.flush()  # Flush before committing
+            await self.session.commit()
+            return pupil
+        except Exception as e:
+            await self.session.rollback()  # Rollback in case of an exception
+            raise e
 
     async def add_lesson(self, day: int, name: str, next_lesson: str, num: int, school_name: str, classroom: str, room: str) -> Lesson:
         lesson = Lesson(day=day, name=name, next=next_lesson, num=num, school_name=school_name, classroom=classroom, room=room)

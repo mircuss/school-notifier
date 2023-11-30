@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 
 from config import DB_USER, DB_HOST, DB_PORT, DB_NAME, DB_PASS
 
-DB_URL =f"mysql+aiomysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DB_URL =f"sqlite+aiosqlite:///school.db"
 
 engine = create_async_engine(DB_URL)
 
