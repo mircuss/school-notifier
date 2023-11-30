@@ -68,7 +68,7 @@ async def add_lessons(message: Message, state: FSMContext):
         try:
             next_lesson = lessons[index+1]
         except IndexError:
-            next_lesson = "Наступного уроку нема"
+            next_lesson = "Наступного уроку немає"
         lesson_s = await Repo().get_lessons_by_number(num=index, class_name=data["class"], day=data["day"])
         if lesson_s is None:
             await Repo().add_lesson(name=" ".join(info[1:-1]), next_lesson=next_lesson, num=index, school_name=data["school"], day=int(data["day"]), classroom=data["class"], room=room)

@@ -1,8 +1,8 @@
 """initial1
 
-Revision ID: b0f383a522dd
+Revision ID: fbc6ab46879a
 Revises: 
-Create Date: 2023-11-16 18:59:22.418364
+Create Date: 2023-11-26 15:14:07.674353
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'b0f383a522dd'
+revision: str = 'fbc6ab46879a'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -36,24 +36,28 @@ def upgrade() -> None:
     )
     op.create_table('lesson',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('day', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=250), nullable=False),
     sa.Column('next', sa.String(length=250), nullable=False),
     sa.Column('num', sa.Integer(), nullable=False),
     sa.Column('school_name', sa.String(length=250), nullable=False),
+    sa.Column('room', sa.String(length=250), nullable=True),
     sa.Column('classroom', sa.String(length=250), nullable=False),
+    sa.Column('edit_lesson', sa.String(length=250), nullable=True),
+    sa.Column('edit_room', sa.String(length=250), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('pupil',
     sa.Column('id', sa.BigInteger(), nullable=False),
     sa.Column('class_num', sa.Integer(), nullable=False),
     sa.Column('class_letter', sa.String(length=250), nullable=False),
-    sa.Column('notify', sa.Boolean(), nullable=False),
+    sa.Column('school_name', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('teacher',
     sa.Column('id', sa.BigInteger(), nullable=False),
-    sa.Column('class_num', sa.Integer(), nullable=False),
-    sa.Column('class_letter', sa.String(length=250), nullable=False),
+    sa.Column('class_num', sa.Integer(), nullable=True),
+    sa.Column('class_letter', sa.String(length=250), nullable=True),
     sa.Column('head_teacher', sa.Boolean(), nullable=False),
     sa.Column('director', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id')

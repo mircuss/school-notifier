@@ -35,6 +35,7 @@ async def generate_classes_keyboard(school_name, prefix: str = ""):
 
 @basic_router.message(F.text == "/start")
 async def start(message: Message):
+
     teacher = await Repo().get_teacher(user_id=int(message.from_user.id))
     if int(ADMIN_ID) == message.from_user.id:
         return await message.answer(text="Вітаю в боті **АДМНІН**", reply_markup=admin_menu)

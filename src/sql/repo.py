@@ -69,6 +69,14 @@ class Repo:
         await self.session.execute(update_stmt)
         await self.session.commit()
 
+    async def update_lesson_next(self, new_next: str | None, classroom: str, day: int, num: int):
+        update_stmt = (
+            update(Lesson)
+            .where(and_(Lesson.classroom == classroom, Lesson.day == day, Lesson.num == num))
+            .values(edit_next=new_next)
+        )
+        await self.session.execute(update_stmt)
+        await self.session.commit()
 
     async def delete_teacher(self, user_id: int):
         teacher = (await self.session.execute(select(Teacher).filter(Teacher.id == user_id))).scalar()
@@ -111,6 +119,16 @@ class Repo:
         )
         result = await self.session.execute(query)
         return result.scalar() is not None
+
+    async def get_lessons_by_conditions(self, day: int, school: str, classroom: str):
+        query = (
+            select(Lesson)
+            .where(Lesson.day == day)
+            .where(Lesson.school_name == school)
+            .where(Lesson.classroom == classroom)
+        )
+
+        return (await self.session.execute(query)).scalars().all()
 
 
 

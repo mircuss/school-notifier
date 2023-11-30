@@ -18,6 +18,7 @@ class Lesson(Base):
     classroom: Mapped[str] = mapped_column(String(250))
     edit_lesson: Mapped[str] = mapped_column(String(250), nullable=True)
     edit_room: Mapped[str] = mapped_column(String(250), nullable=True)
+    edit_next: Mapped[str] = mapped_column(String(250), nullable=True)
 
 class Journal(Base):
 
