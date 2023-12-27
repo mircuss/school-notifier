@@ -2,3 +2,6 @@
 **/__pycache__
 **.pyc
 school.db
+.env
+231
+*.pyc

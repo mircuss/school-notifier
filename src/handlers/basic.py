@@ -21,6 +21,7 @@ async def generate_schools_keyboard():
         
     return keyboard.as_markup()
 
+
 async def generate_classes_keyboard(school_name, prefix: str = ""):
     classes = await Repo().get_classes_by_school(school_name=school_name)
     keyboard = InlineKeyboardBuilder()
@@ -32,10 +33,8 @@ async def generate_classes_keyboard(school_name, prefix: str = ""):
     return keyboard.as_markup()
 
 
-
 @basic_router.message(F.text == "/start")
 async def start(message: Message):
-
     teacher = await Repo().get_teacher(user_id=int(message.from_user.id))
     if int(ADMIN_ID) == message.from_user.id:
         return await message.answer(text="Вітаю в боті **АДМНІН**", reply_markup=admin_menu)
@@ -52,8 +51,7 @@ async def get_class(call: CallbackQuery, state: FSMContext):
     data = call.data.split("_")
     keyboard = await generate_classes_keyboard(data[-1])
     await state.update_data({"school": data[-1]})
-    await call.message.answer(text="Оберіть клас", reply_markup=keyboard)
-
+    await call.message.edit_text(text="Оберіть клас", reply_markup=keyboard)
 
 
 @basic_router.callback_query(F.data.startswith("class"))
@@ -64,7 +62,6 @@ async def select_classroom(call: CallbackQuery, state: FSMContext):
     await state.clear()
     await call.message.answer(text="Ви успішно зареєструвались", reply_markup=main_markup)
     
-
 
 @basic_router.message(F.text == "Змінити клас")
 async def change_classroom(message: Message):

@@ -5,4 +5,4 @@ main_markup = ReplyKeyboardMarkup(keyboard=[
     [
         KeyboardButton(text="Змінити клас")
     ]
-], resize=True)
+], resize_keyboard=True)

@@ -4,10 +4,8 @@ from handlers.basic import basic_router
 from handlers.admin_menu import admin_router
 from handlers.teacher_menu import teacher_router
 from config import TOKEN
-from sql.repo import Repo
 
 from services.scheduler_notify import start_sheduler
-
 
 
 async def main():

@@ -1,8 +1,8 @@
-"""initial1
+"""initial
 
-Revision ID: fbc6ab46879a
+Revision ID: 0a55a4b06bd2
 Revises: 
-Create Date: 2023-11-26 15:14:07.674353
+Create Date: 2023-12-25 18:38:00.440157
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'fbc6ab46879a'
+revision: str = '0a55a4b06bd2'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -45,13 +45,14 @@ def upgrade() -> None:
     sa.Column('classroom', sa.String(length=250), nullable=False),
     sa.Column('edit_lesson', sa.String(length=250), nullable=True),
     sa.Column('edit_room', sa.String(length=250), nullable=True),
+    sa.Column('edit_next', sa.String(length=250), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('pupil',
     sa.Column('id', sa.BigInteger(), nullable=False),
     sa.Column('class_num', sa.Integer(), nullable=False),
     sa.Column('class_letter', sa.String(length=250), nullable=False),
-    sa.Column('school_name', sa.Boolean(), nullable=False),
+    sa.Column('school_name', sa.String(length=250), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('teacher',
