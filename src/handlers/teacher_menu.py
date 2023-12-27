@@ -66,6 +66,8 @@ async def add_announce(message: Message, state: FSMContext, bot: Bot):
             await Repo().update_lesson(edit_room=None, edit_lesson=None, classroom=classroom, day=day, num=number)
             await Repo().update_lesson_next(new_next=None, classroom=classroom, day=day, num=number-1)
             continue
+        if len(info) == 2:
+            await Repo().update_lesson(edit_room="", edit_lesson=" ".join(info[1:-1]), classroom=classroom, day=day, num=number)
         if len(info[-1]) <= 5:
             room = info[-1]
         else:
